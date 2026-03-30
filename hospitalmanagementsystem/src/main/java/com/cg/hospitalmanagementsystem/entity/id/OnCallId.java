@@ -1,10 +1,8 @@
 package com.cg.hospitalmanagementsystem.entity.id;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,8 +14,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OnCallId implements Serializable {
 
+    @Column(name = "Nurse")
     private Integer nurseId;
+
+    @Column(name = "BlockFloor")
     private Integer blockFloor;
+
+    @Column(name = "BlockCode")
     private Integer blockCode;
+
+    @Column(name = "OnCallStart")
     private LocalDateTime onCallStart;
+
+    @Column(name = "OnCallEnd")
+    private LocalDateTime onCallEnd;
 }

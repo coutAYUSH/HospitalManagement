@@ -2,18 +2,15 @@ package com.cg.hospitalmanagementsystem.entity;
 
 import com.cg.hospitalmanagementsystem.entity.id.OnCallId;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
+@Table(name = "on_call")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class OnCall {
 
     @EmbeddedId
@@ -21,8 +18,12 @@ public class OnCall {
 
     @ManyToOne
     @MapsId("nurseId")
-    @JoinColumn(name = "nurse")
+    @JoinColumn(name = "Nurse", referencedColumnName = "EmployeeID")
     private Nurse nurse;
 
-    private LocalDateTime onCallEnd;
+    @ManyToOne
+    @JoinColumns({ @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor"),
+            @JoinColumn(name = "BlockCode", referencedColumnName = "BlockCode")
+    })
+    private Block block;
 }
