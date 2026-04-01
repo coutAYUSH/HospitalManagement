@@ -1,7 +1,5 @@
 package com.cg.hospitalmanagementsystem.mappers;
 
-import com.cg.hospitalmanagementsystem.dto.request.TrainedInRequestDTO;
-import com.cg.hospitalmanagementsystem.dto.response.TrainedInResponseDTO;
 import com.cg.hospitalmanagementsystem.entity.*;
 import com.cg.hospitalmanagementsystem.entity.id.TrainedInId;
 import lombok.RequiredArgsConstructor;

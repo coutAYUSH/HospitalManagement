@@ -1,11 +1,6 @@
 package com.cg.hospitalmanagementsystem.mappers;
 
 
-import com.cg.hospitalmanagementsystem.dto.request.AppointmentRequestDTO;
-import com.cg.hospitalmanagementsystem.dto.response.AppointmentResponseDTO;
-import com.cg.hospitalmanagementsystem.entity.Appointment;
-import com.cg.hospitalmanagementsystem.entity.Nurse;
-import com.cg.hospitalmanagementsystem.entity.Physician;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
