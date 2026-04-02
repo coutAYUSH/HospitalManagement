@@ -22,8 +22,8 @@ public class OnCall {
     private Nurse nurse;
 
     @ManyToOne
-    @JoinColumns({ @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor"),
-            @JoinColumn(name = "BlockCode", referencedColumnName = "BlockCode")
+    @JoinColumns({ @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor", insertable = false, updatable = false),
+            @JoinColumn(name = "BlockCode", referencedColumnName = "BlockCode", insertable = false, updatable = false)
     })
     private Block block;
 }

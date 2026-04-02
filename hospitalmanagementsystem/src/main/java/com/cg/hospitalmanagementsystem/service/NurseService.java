@@ -18,7 +18,6 @@ public interface NurseService {
 
     List<OnCall> allAssignedOnCalls(NurseRequest nurseRequest);
 
-    List<OnCall> allAssignedOnCalls(NurseRequest nurseRequest);
 }
 
 

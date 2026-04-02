@@ -2,8 +2,10 @@ package com.cg.hospitalmanagementsystem.controller;
 
 import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.request.StaffRegisterRequest;
+import com.cg.hospitalmanagementsystem.entity.Nurse;
 import com.cg.hospitalmanagementsystem.entity.Patient;
 import com.cg.hospitalmanagementsystem.entity.Physician;
+import com.cg.hospitalmanagementsystem.service.imp.StaffServiceImp;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
