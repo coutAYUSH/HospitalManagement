@@ -1,21 +1,29 @@
 package com.cg.hospitalmanagementsystem.entity.id;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
 
 
-@Entity
-@Table(name = "block")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@Embeddable
 @AllArgsConstructor
-@Builder
-public class Block {
+public class BlockId implements Serializable {
 
 
-    @EmbeddedId
-    private BlockId id;
+    @Column(name = "BlockFloor")
+    private Integer blockFloor;
+
+
+    @Column(name = "BlockCode")
+    private Integer blockCode;
+
+
+
+
 }
+
