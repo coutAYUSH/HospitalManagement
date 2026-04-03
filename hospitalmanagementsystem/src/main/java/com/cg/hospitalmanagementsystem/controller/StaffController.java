@@ -16,9 +16,11 @@ import java.util.List;
 public class StaffController {
 
     private final StaffServiceImp staffServiceImp;
+    private final ProcedureServiceImp procedureServiceImp;
 
-    public StaffController(StaffServiceImp staffServiceImp){
+    public StaffController(StaffServiceImp staffServiceImp, ProcedureServiceImp procedureServiceImp){
         this.staffServiceImp = staffServiceImp;
+        this.procedureServiceImp = procedureServiceImp;
     }
 
     @PostMapping("/register")

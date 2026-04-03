@@ -1,10 +1,10 @@
 spring:
   application:
-    name: hmsDemo
+    name: HospitalManagement
   datasource:
-    url: jdbc:mysql://localhost:3306/hmsdemo
-    username: root
-    password: Vishal@2020
+    url: jdbc:mysql://:3306/hms
+    username: client_user
+    password: password123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

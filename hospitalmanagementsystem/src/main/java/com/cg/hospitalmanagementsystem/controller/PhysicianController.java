@@ -7,10 +7,7 @@ import com.cg.hospitalmanagementsystem.entity.Prescribes;
 import com.cg.hospitalmanagementsystem.service.imp.DoctorServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,8 @@ public class PhysicianController {
         this.doctorServiceImp = doctorServiceImp;
     }
 
+
+    //Get all patients assigned to a specific physician
     @GetMapping("/patients")
     public ResponseEntity<List<PhysicianPatientResponse>> getAllPatients(@RequestBody PhysicianRequest physicianRequest){
 
@@ -43,5 +42,7 @@ public class PhysicianController {
         List<Prescribes> prescribes = doctorServiceImp.allAssignedPrescriptions(physicianRequest);
         return ResponseEntity.status(HttpStatus.OK).body(prescribes);
     }
+
+
 }
 

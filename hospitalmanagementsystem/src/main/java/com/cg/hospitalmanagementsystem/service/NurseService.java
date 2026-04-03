@@ -4,6 +4,7 @@ package com.cg.hospitalmanagementsystem.service;
 
 
 import com.cg.hospitalmanagementsystem.dto.request.NurseRequest;
+import com.cg.hospitalmanagementsystem.dto.response.NurseResponse;
 import com.cg.hospitalmanagementsystem.entity.Appointment;
 import com.cg.hospitalmanagementsystem.entity.OnCall;
 
@@ -17,6 +18,8 @@ public interface NurseService {
 
 
     List<OnCall> allAssignedOnCalls(NurseRequest nurseRequest);
+    List<NurseResponse> getAllNurses();
+
 
 }
 
