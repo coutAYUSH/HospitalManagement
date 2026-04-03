@@ -7,11 +7,16 @@ import com.cg.hospitalmanagementsystem.dto.response.PhysicianPatientResponse;
 import com.cg.hospitalmanagementsystem.entity.Appointment;
 import com.cg.hospitalmanagementsystem.entity.Prescribes;
 import com.cg.hospitalmanagementsystem.service.imp.DoctorServiceImp;
+import com.cg.hospitalmanagementsystem.filter.JwtFilter;
+import com.cg.hospitalmanagementsystem.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,12 +24,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(PhysicianController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class PhysicianControllerTest {
 
     @Autowired
@@ -33,24 +37,25 @@ public class PhysicianControllerTest {
     @MockBean
     private DoctorServiceImp doctorServiceImp;
 
+    @MockBean
+    private JwtFilter jwtFilter;
+
+    @MockBean
+    private JwtUtil jwtUtil;
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Test
     void testGetAllPatients() throws Exception {
-
         PhysicianRequest request = new PhysicianRequest();
         request.setId(1);
-        request.setName("Dr. John");
-        request.setPosition("Cardiologist");
 
         PhysicianPatientResponse response = new PhysicianPatientResponse();
-        // set fields if needed
+        List<PhysicianPatientResponse> responses = Arrays.asList(response);
 
-        List<PhysicianPatientResponse> responseList = Arrays.asList(response);
-
-        when(doctorServiceImp.allAssignedPatients(any(PhysicianRequest.class)))
-                .thenReturn(responseList);
+        Mockito.when(doctorServiceImp.allAssignedPatients(Mockito.any(PhysicianRequest.class)))
+                .thenReturn(responses);
 
         mockMvc.perform(get("/physician/patients")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -60,17 +65,14 @@ public class PhysicianControllerTest {
 
     @Test
     void testGetAllAppointments() throws Exception {
-
         PhysicianRequest request = new PhysicianRequest();
         request.setId(1);
-        request.setName("Dr. John");
-        request.setPosition("Cardiologist");
 
         Appointment appointment = new Appointment();
-        List<Appointment> appointmentList = Arrays.asList(appointment);
+        List<Appointment> appointments = Arrays.asList(appointment);
 
-        when(doctorServiceImp.allAssignedAppointments(any(PhysicianRequest.class)))
-                .thenReturn(appointmentList);
+        Mockito.when(doctorServiceImp.allAssignedAppointments(Mockito.any(PhysicianRequest.class)))
+                .thenReturn(appointments);
 
         mockMvc.perform(get("/physician/appointments")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -80,16 +82,13 @@ public class PhysicianControllerTest {
 
     @Test
     void testGetAllPrescriptions() throws Exception {
-
         PhysicianRequest request = new PhysicianRequest();
         request.setId(1);
-        request.setName("Dr. John");
-        request.setPosition("Cardiologist");
 
         Prescribes prescribes = new Prescribes();
         List<Prescribes> prescribesList = Arrays.asList(prescribes);
 
-        when(doctorServiceImp.allAssignedPrescriptions(any(PhysicianRequest.class)))
+        Mockito.when(doctorServiceImp.allAssignedPrescriptions(Mockito.any(PhysicianRequest.class)))
                 .thenReturn(prescribesList);
 
         mockMvc.perform(get("/physician/prescribes")

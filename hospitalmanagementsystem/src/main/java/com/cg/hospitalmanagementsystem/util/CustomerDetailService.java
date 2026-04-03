@@ -2,7 +2,7 @@ package com.cg.hospitalmanagementsystem.util;
 
 import com.cg.hospitalmanagementsystem.entity.Staff;
 import com.cg.hospitalmanagementsystem.exception.UserNotFoundException;
-import com.cg.hospitalmanagementsystem.reposistory.StaffRepository;
+import com.cg.hospitalmanagementsystem.repository.StaffRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
