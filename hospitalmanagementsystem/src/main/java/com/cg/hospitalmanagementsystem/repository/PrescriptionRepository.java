@@ -1,4 +1,4 @@
-package com.cg.hospitalmanagementsystem.reposistory;
+package com.cg.hospitalmanagementsystem.repository;
 
 import com.cg.hospitalmanagementsystem.entity.Prescribes;
 import com.cg.hospitalmanagementsystem.entity.id.PrescribesId;

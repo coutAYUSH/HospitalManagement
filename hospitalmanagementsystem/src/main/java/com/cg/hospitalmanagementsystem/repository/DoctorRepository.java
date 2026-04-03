@@ -1,4 +1,4 @@
-package com.cg.hospitalmanagementsystem.reposistory;
+package com.cg.hospitalmanagementsystem.repository;
 
 import com.cg.hospitalmanagementsystem.entity.Physician;
 import org.springframework.data.jpa.repository.JpaRepository;

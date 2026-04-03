@@ -3,7 +3,7 @@ package com.cg.hospitalmanagementsystem.service.imp;
 import com.cg.hospitalmanagementsystem.dto.response.RoomResponse;
 import com.cg.hospitalmanagementsystem.entity.Room;
 import com.cg.hospitalmanagementsystem.exception.NoRoomsAvailableException;
-import com.cg.hospitalmanagementsystem.reposistory.RoomRepository;
+import com.cg.hospitalmanagementsystem.repository.RoomRepository;
 import com.cg.hospitalmanagementsystem.service.RoomService;
 import org.springframework.stereotype.Service;
 

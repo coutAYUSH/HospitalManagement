@@ -1,7 +1,5 @@
-package com.cg.hospitalmanagementsystem.reposistory;
+package com.cg.hospitalmanagementsystem.repository;
 
-import com.cg.hospitalmanagementsystem.dto.response.RoomResponse;
-import com.cg.hospitalmanagementsystem.entity.Nurse;
 import com.cg.hospitalmanagementsystem.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

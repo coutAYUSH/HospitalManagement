@@ -4,9 +4,9 @@ import com.cg.hospitalmanagementsystem.dto.request.NurseRequest;
 import com.cg.hospitalmanagementsystem.dto.response.NurseResponse;
 import com.cg.hospitalmanagementsystem.entity.Appointment;
 import com.cg.hospitalmanagementsystem.entity.OnCall;
-import com.cg.hospitalmanagementsystem.reposistory.AppointmentRepository;
-import com.cg.hospitalmanagementsystem.reposistory.NurseRepository;
-import com.cg.hospitalmanagementsystem.reposistory.OnCallRepository;
+import com.cg.hospitalmanagementsystem.repository.AppointmentRepository;
+import com.cg.hospitalmanagementsystem.repository.NurseRepository;
+import com.cg.hospitalmanagementsystem.repository.OnCallRepository;
 import com.cg.hospitalmanagementsystem.service.NurseService;
 import org.springframework.stereotype.Service;
 

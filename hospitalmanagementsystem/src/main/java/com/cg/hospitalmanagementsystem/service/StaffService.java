@@ -7,6 +7,7 @@ package com.cg.hospitalmanagementsystem.service;
 
 import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.request.StaffRegisterRequest;
+import com.cg.hospitalmanagementsystem.dto.response.TrainedInResponse;
 import com.cg.hospitalmanagementsystem.entity.Nurse;
 import com.cg.hospitalmanagementsystem.entity.Patient;
 import com.cg.hospitalmanagementsystem.entity.Physician;
@@ -30,6 +31,8 @@ public interface StaffService {
 
 
     List<Nurse> fetchAllNurse();
+
+    List<TrainedInResponse> getByPhysicianId(Integer physicianId);
 
 
 }

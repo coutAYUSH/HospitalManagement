@@ -61,6 +61,17 @@ public class GlobalExceptionHandler {
         return error;
     }
 
+    @ExceptionHandler(TrainedInNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, Object> handleTrainedInNotFoundException(TrainedInNotFoundException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        error.put("status", 404);
+        error.put("timestamp", LocalDateTime.now());
+        return error;
+    }
+
+
 
 
 

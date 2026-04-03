@@ -3,7 +3,7 @@ package com.cg.hospitalmanagementsystem.service.imp;
 
 import com.cg.hospitalmanagementsystem.dto.response.ProcedureResponse;
 import com.cg.hospitalmanagementsystem.entity.Procedure;
-import com.cg.hospitalmanagementsystem.reposistory.ProcedureRepository;
+import com.cg.hospitalmanagementsystem.repository.ProcedureRepository;
 import com.cg.hospitalmanagementsystem.service.ProcedureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

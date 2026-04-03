@@ -5,7 +5,10 @@ import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.request.StaffRegisterRequest;
 import com.cg.hospitalmanagementsystem.dto.response.PatientResponse;
 import com.cg.hospitalmanagementsystem.dto.response.ProcedureResponse;
+import com.cg.hospitalmanagementsystem.dto.response.StayResponse;
+import com.cg.hospitalmanagementsystem.dto.response.TrainedInResponse;
 import com.cg.hospitalmanagementsystem.entity.*;
+import com.cg.hospitalmanagementsystem.service.StayService;
 import com.cg.hospitalmanagementsystem.service.imp.ProcedureServiceImp;
 import com.cg.hospitalmanagementsystem.service.imp.StaffServiceImp;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +23,12 @@ public class StaffController {
     private final StaffServiceImp staffServiceImp;
     private final ProcedureServiceImp procedureServiceImp;
 
-    public StaffController(StaffServiceImp staffServiceImp, ProcedureServiceImp procedureServiceImp){
+
+
+    public StaffController(StaffServiceImp staffServiceImp, ProcedureServiceImp procedureServiceImp, StayService stayService){
         this.staffServiceImp = staffServiceImp;
         this.procedureServiceImp = procedureServiceImp;
+        this.stayService = stayService;
     }
 
     @PostMapping("/register")
@@ -74,6 +80,35 @@ public class StaffController {
     public ResponseEntity<List<ProcedureResponse>> getAllProcedures() {
         return ResponseEntity.ok(procedureServiceImp.getAllProcedures());
     }
+
+    private final StayService stayService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StayResponse> getStayById(@PathVariable Integer id) {
+
+        StayResponse response = stayService.getStayById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/stayOfPatient/{patientId}")
+    public ResponseEntity<List<StayResponse>> getStaysByPatientId(
+            @PathVariable Integer patientId) {
+
+        List<StayResponse> responses = stayService.getStaysByPatientId(patientId);
+        return ResponseEntity.ok(responses);
+    }
+
+
+    @GetMapping("/physicianTrainedIn/{physicianId}")
+    public ResponseEntity<List<TrainedInResponse>> getByPhysicianId(
+            @PathVariable Integer physicianId) {
+
+        return ResponseEntity.ok(
+                staffServiceImp.getByPhysicianId(physicianId)
+        );
+    }
+
+
 
 
 }

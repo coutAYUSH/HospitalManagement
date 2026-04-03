@@ -1,4 +1,4 @@
-package com.cg.hospitalmanagementsystem.reposistory;
+package com.cg.hospitalmanagementsystem.repository;
 
 import com.cg.hospitalmanagementsystem.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +21,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query("SELECT a FROM Appointment a WHERE a.prepNurse.employeeId = :nurseId")
     List<Appointment> allAppointmentByNurseId(@Param("nurseId") Integer nurseId);
 
-    @Query("SELECT a FROM Appointment a WHERE a.Patient = :id")
-    List<Appointment> getAppointmentsByPatientId(@Param("id")Integer id);
+    @Query("SELECT a FROM Appointment a WHERE a.patient.ssn = :id")
+    List<Appointment> getAppointmentsByPatientId(@Param("id") Integer id);
 }

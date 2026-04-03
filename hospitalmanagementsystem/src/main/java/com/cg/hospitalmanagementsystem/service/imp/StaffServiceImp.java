@@ -3,13 +3,11 @@ package com.cg.hospitalmanagementsystem.service.imp;
 import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.request.StaffRegisterRequest;
 import com.cg.hospitalmanagementsystem.dto.response.PatientResponse;
+import com.cg.hospitalmanagementsystem.dto.response.TrainedInResponse;
 import com.cg.hospitalmanagementsystem.entity.*;
-import com.cg.hospitalmanagementsystem.exception.AppointmentNotFoundException;
-import com.cg.hospitalmanagementsystem.exception.InvalidCredentialException;
-import com.cg.hospitalmanagementsystem.exception.PatientNotFoundException;
-import com.cg.hospitalmanagementsystem.exception.UserNotFoundException;
+import com.cg.hospitalmanagementsystem.exception.*;
 import com.cg.hospitalmanagementsystem.mapper.PatientMapper;
-import com.cg.hospitalmanagementsystem.reposistory.*;
+import com.cg.hospitalmanagementsystem.repository.*;
 import com.cg.hospitalmanagementsystem.service.StaffService;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +21,17 @@ public class StaffServiceImp implements StaffService {
     private final DoctorRepository doctorRepository;
     private final NurseRepository nurseRepository;
     private final AppointmentRepository appointmentRepository;
+    private final TrainedInRepository trainedInRepository;
 
     public StaffServiceImp(StaffRepository staffRepository, PatientRepository patientRepository
-            ,DoctorRepository doctorRepository, NurseRepository nurseRepository , AppointmentRepository appointmentRepository){
+            , DoctorRepository doctorRepository, NurseRepository nurseRepository, AppointmentRepository appointmentRepository, TrainedInRepository trainedInRepository) {
         this.staffRepository = staffRepository;
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.nurseRepository = nurseRepository;
         this.appointmentRepository = appointmentRepository;
+        this.trainedInRepository = trainedInRepository;
     }
-
-
 
 
     @Override
@@ -48,11 +46,11 @@ public class StaffServiceImp implements StaffService {
     @Override
     public void loginStaff(StaffLoginRequest staffLoginRequest) {
         Staff staff = staffRepository.findByEmail(staffLoginRequest.getEmail())
-                .orElseThrow(()-> new UserNotFoundException("User not found with email: "+ staffLoginRequest.getEmail()));
+                .orElseThrow(() -> new UserNotFoundException("User not found with email: " + staffLoginRequest.getEmail()));
 
         boolean correctPassword = staff.getStaffEmail().equals(staffLoginRequest.getEmail());
 
-        if(!correctPassword){
+        if (!correctPassword) {
             throw new InvalidCredentialException("Invalid credentials!");
         }
 
@@ -90,13 +88,37 @@ public class StaffServiceImp implements StaffService {
         return appointment;
     }
 
-    public  List<Appointment> getAllAppointmentsByPatientId(Integer id) {
+    public List<Appointment> getAllAppointmentsByPatientId(Integer id) {
         List<Appointment> appointments = appointmentRepository.getAppointmentsByPatientId(id)
                 .stream()
                 .toList();
-        if(appointments.isEmpty()){
+        if (appointments.isEmpty()) {
             throw new AppointmentNotFoundException("No appointment with given PatientId");
         }
         return appointments;
+    }
+
+    @Override
+    public List<TrainedInResponse> getByPhysicianId(Integer physicianId) {
+
+        List<TrainedIn> list = trainedInRepository.findByPhysicianWithDetails(physicianId);
+
+        if (list.isEmpty()) {
+            throw new TrainedInNotFoundException("No training records found for given physician Id");
+        }
+
+
+        return list.stream().map(t ->
+                    TrainedInResponse.builder()
+                            .physicianId(t.getPhysician().getEmployeeId())
+                            .physicianName(t.getPhysician().getName())
+                            .procedureId(t.getProcedure().getCode())
+                            // comment this if error
+                            //.procedureName(t.getProcedure().getName())
+                            .certificationDate(t.getCertificationDate())
+                            .certificationExpires(t.getCertificationExpires())
+                            .build()
+            ).toList();
+
     }
 }
