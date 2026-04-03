@@ -51,6 +51,15 @@ public class GlobalExceptionHandler {
         error.put("timestamp", LocalDateTime.now());
         return error;
     }
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, Object> handleAppointmentNotFoundException(AppointmentNotFoundException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        error.put("status", 404);
+        error.put("timestamp", LocalDateTime.now());
+        return error;
+    }
 
 
 

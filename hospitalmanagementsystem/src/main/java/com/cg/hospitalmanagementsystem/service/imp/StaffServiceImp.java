@@ -3,18 +3,13 @@ package com.cg.hospitalmanagementsystem.service.imp;
 import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.request.StaffRegisterRequest;
 import com.cg.hospitalmanagementsystem.dto.response.PatientResponse;
-import com.cg.hospitalmanagementsystem.entity.Nurse;
-import com.cg.hospitalmanagementsystem.entity.Patient;
-import com.cg.hospitalmanagementsystem.entity.Physician;
-import com.cg.hospitalmanagementsystem.entity.Staff;
+import com.cg.hospitalmanagementsystem.entity.*;
+import com.cg.hospitalmanagementsystem.exception.AppointmentNotFoundException;
 import com.cg.hospitalmanagementsystem.exception.InvalidCredentialException;
 import com.cg.hospitalmanagementsystem.exception.PatientNotFoundException;
 import com.cg.hospitalmanagementsystem.exception.UserNotFoundException;
 import com.cg.hospitalmanagementsystem.mapper.PatientMapper;
-import com.cg.hospitalmanagementsystem.reposistory.DoctorRepository;
-import com.cg.hospitalmanagementsystem.reposistory.NurseRepository;
-import com.cg.hospitalmanagementsystem.reposistory.PatientRepository;
-import com.cg.hospitalmanagementsystem.reposistory.StaffRepository;
+import com.cg.hospitalmanagementsystem.reposistory.*;
 import com.cg.hospitalmanagementsystem.service.StaffService;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +22,18 @@ public class StaffServiceImp implements StaffService {
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
     private final NurseRepository nurseRepository;
+    private final AppointmentRepository appointmentRepository;
 
     public StaffServiceImp(StaffRepository staffRepository, PatientRepository patientRepository
-            ,DoctorRepository doctorRepository, NurseRepository nurseRepository){
+            ,DoctorRepository doctorRepository, NurseRepository nurseRepository , AppointmentRepository appointmentRepository){
         this.staffRepository = staffRepository;
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.nurseRepository = nurseRepository;
+        this.appointmentRepository = appointmentRepository;
     }
+
+
 
 
     @Override
@@ -85,4 +84,19 @@ public class StaffServiceImp implements StaffService {
         return PatientMapper.mapToDto(patient);
     }
 
+    public Appointment getAppointmentById(Integer id) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new AppointmentNotFoundException("No appointment with given Id"));
+        return appointment;
+    }
+
+    public  List<Appointment> getAllAppointmentsByPatientId(Integer id) {
+        List<Appointment> appointments = appointmentRepository.getAppointmentsByPatientId(id)
+                .stream()
+                .toList();
+        if(appointments.isEmpty()){
+            throw new AppointmentNotFoundException("No appointment with given PatientId");
+        }
+        return appointments;
+    }
 }
