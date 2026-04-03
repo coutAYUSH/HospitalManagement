@@ -3,7 +3,7 @@ package com.cg.hospitalmanagementsystem.service.imp;
 import com.cg.hospitalmanagementsystem.dto.request.StaffLoginRequest;
 import com.cg.hospitalmanagementsystem.dto.response.LoginResponse;
 import com.cg.hospitalmanagementsystem.entity.Staff;
-import com.cg.hospitalmanagementsystem.reposistory.StaffRepository;
+import com.cg.hospitalmanagementsystem.repository.StaffRepository;
 import com.cg.hospitalmanagementsystem.service.AuthService;
 import com.cg.hospitalmanagementsystem.util.JwtUtil;
 import org.springframework.stereotype.Service;
